@@ -35,3 +35,5 @@ func (s *QueueScheduler) Poll() *Request {
 	log.Debug("QueueScheduler Poll Url: ", request.url)
 	return request
 }
+
+var InMemoryScheduler = &QueueScheduler{queue: list.New()}
