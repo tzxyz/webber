@@ -1,9 +1,9 @@
 package webber
 
 import (
-	"github.com/sirupsen/logrus"
 	"runtime"
 	"path/filepath"
+	"github.com/sirupsen/logrus"
 )
 
 var logger = logrus.New()

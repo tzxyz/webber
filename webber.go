@@ -3,6 +3,7 @@ package webber
 import (
 	"sync"
 	"time"
+	"runtime"
 )
 
 type Webber struct {
@@ -56,6 +57,8 @@ func (w *Webber) Pipelines(pipelines ...Pipeline) *Webber {
 }
 
 func (w *Webber) Start() {
+
+	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	for _, url := range w.startUrls {
 		w.scheduler.Push(NewRequest().Url(url))
