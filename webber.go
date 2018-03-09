@@ -3,7 +3,6 @@ package webber
 import (
 	"sync"
 	"time"
-	log "github.com/sirupsen/logrus"
 )
 
 type Webber struct {
@@ -85,11 +84,7 @@ func (w *Webber) Start() {
 
 				resp := w.downloader(req)
 
-				log.Info("Downloader download Url: ", req.url)
-
 				result := w.processor(resp)
-
-				log.Info("Processor process Url: ", req.url)
 
 				for _, pipeline := range w.pipelines {
 					pipeline(result)

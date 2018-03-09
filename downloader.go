@@ -8,7 +8,11 @@ type Downloader func(request *Request) *Response
 var HttpDownloader = func(request *Request) *Response {
 	var resp *http.Response
 	var errs []error
+
+	logger.Debug("Starting download url: " + request.url)
+
 	resp, body, errs := requests.New().Get(request.url).EndBytes()
+
 	if len(errs) != 0 {
 		panic(errs[0])
 	}

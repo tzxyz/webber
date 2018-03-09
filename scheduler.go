@@ -3,7 +3,6 @@ package webber
 import (
 	"sync"
 	"container/list"
-	log "github.com/sirupsen/logrus"
 )
 
 type Scheduler interface {
@@ -20,7 +19,7 @@ func (s *QueueScheduler) Push(request *Request) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	s.queue.PushBack(request)
-	log.Debug("QueueScheduler Push Url: ", request.url)
+	logger.Debug("QueueScheduler Push Url: ", request.url)
 }
 
 func (s *QueueScheduler) Poll() *Request {
@@ -32,7 +31,7 @@ func (s *QueueScheduler) Poll() *Request {
 	}
 	s.queue.Remove(e)
 	request := e.Value.(*Request)
-	log.Debug("QueueScheduler Poll Url: ", request.url)
+	logger.Debug("QueueScheduler Poll Url: ", request.url)
 	return request
 }
 
