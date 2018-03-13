@@ -4,6 +4,8 @@ import (
 	"sync"
 	"time"
 	"runtime"
+	"fmt"
+	"strings"
 )
 
 type Webber struct {
@@ -85,7 +87,15 @@ func (w *Webber) Start() {
 					wg.Done()
 				}()
 
-				resp := w.downloader(req)
+				resp, errs := w.downloader(req)
+
+				if errs != nil && len(errs) != 0 {
+					var msg = make([]string, 0)
+					for _, err := range errs {
+						msg = append(msg, fmt.Sprint(err))
+					}
+					logger.Error(strings.Join(msg, ","))
+				}
 
 				result := w.processor(resp)
 
