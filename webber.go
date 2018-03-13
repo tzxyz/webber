@@ -6,6 +6,7 @@ import (
 	"runtime"
 	"fmt"
 	"strings"
+	"net/http"
 )
 
 type Webber struct {
@@ -63,7 +64,11 @@ func (w *Webber) Start() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	for _, url := range w.startUrls {
-		w.scheduler.Push(NewRequest().Url(url))
+		r, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+
+		}
+		w.scheduler.Push(newRequest(r))
 	}
 
 	var wg sync.WaitGroup
@@ -106,7 +111,11 @@ func (w *Webber) Start() {
 				if result.HasNextUrl() {
 
 					for _, url := range result.NextUrls() {
-						w.scheduler.Push(NewRequest().Url(url))
+						r, err := http.NewRequest("GET", url, nil)
+						if err != nil {
+
+						}
+						w.scheduler.Push(newRequest(r))
 					}
 				}
 			}()

@@ -1,65 +1,32 @@
 package webber
 
 import (
-	"strings"
 	"net/http"
 	"gopkg.in/xmlpath.v2"
 )
 
 type Response struct {
-	code    int
-	status  string
-	headers map[string][]string
-	cookies []*http.Cookie
-	body    string
-	request *Request
+	req     *Request
+	resp    *http.Response
+	url     string
 	node    *xmlpath.Node
 	charset string
 }
 
-func NewResponse() *Response {
+func newResponse(req *Request, resp *http.Response) *Response {
 	return &Response{
-		headers: make(map[string][]string),
-		cookies: make([]*http.Cookie, 16),
+		req:  req,
+		resp: resp,
+		url: req.url,
 	}
 }
 
-func (r *Response) GetUrl() string {
-	return r.request.url
-}
-
-func (r *Response) Code(code int) *Response {
-	r.code = code
-	return r
-}
-
-func (r *Response) Status(status string) *Response {
-	r.status = status
-	return r
-}
-
-func (r *Response) Body(body string) *Response {
-	r.body = body
-	return r
-}
-
-func (r *Response) Headers(headers map[string][]string) *Response {
-	r.headers = headers
-	return r
-}
-
-func (r *Response) Cookies(cookies []*http.Cookie) *Response {
-	r.cookies = cookies
-	return r
-}
-
-func (r *Response) Request(request *Request) *Response {
-	r.request = request
-	return r
+func (r *Response) Url() string {
+	return r.url
 }
 
 func (r *Response) Html() *Response {
-	node, err := xmlpath.ParseHTML(strings.NewReader(r.body))
+	node, err := xmlpath.ParseHTML(r.resp.Body)
 	// todo 不应该panic
 	if err != nil {
 		panic(err)
