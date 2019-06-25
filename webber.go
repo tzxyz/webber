@@ -1,12 +1,12 @@
 package webber
 
 import (
+	"fmt"
+	"net/http"
+	"runtime"
+	"strings"
 	"sync"
 	"time"
-	"runtime"
-	"fmt"
-	"strings"
-	"net/http"
 )
 
 type Webber struct {

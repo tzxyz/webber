@@ -1,9 +1,9 @@
 package webber
 
 import (
-	"runtime"
-	"path/filepath"
 	"github.com/sirupsen/logrus"
+	"path/filepath"
+	"runtime"
 )
 
 var logger = logrus.New()
@@ -38,26 +38,26 @@ func (h *TraceHook) Fire(entry *logrus.Entry) error {
 	return nil
 }
 
-func Debug(args ...interface{})  {
+func Debug(args ...interface{}) {
 	logger.Debug(args)
 }
 
-func Info(args ...interface{})  {
+func Info(args ...interface{}) {
 	logger.Info(args)
 }
 
-func Warn(args ...interface{})  {
+func Warn(args ...interface{}) {
 	logger.Warn(args)
 }
 
-func Error(args ...interface{})  {
+func Error(args ...interface{}) {
 	logger.Error(args)
 }
 
-func Panic(args ...interface{})  {
+func Panic(args ...interface{}) {
 	logger.Panic(args)
 }
 
-func Fatal(args ...interface{})  {
+func Fatal(args ...interface{}) {
 	logger.Fatal(args)
 }

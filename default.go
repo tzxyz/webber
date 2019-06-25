@@ -5,4 +5,3 @@ var (
 	DefaultScheduler  = InMemoryScheduler
 	DefaultPipelines  = []Pipeline{ConsolePipeline}
 )
-

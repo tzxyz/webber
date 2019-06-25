@@ -1,8 +1,8 @@
 package webber
 
 import (
-	"sync"
 	"container/list"
+	"sync"
 )
 
 type Scheduler interface {

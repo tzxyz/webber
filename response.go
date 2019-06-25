@@ -1,8 +1,8 @@
 package webber
 
 import (
-	"net/http"
 	"gopkg.in/xmlpath.v2"
+	"net/http"
 )
 
 type Response struct {
@@ -17,7 +17,7 @@ func newResponse(req *Request, resp *http.Response) *Response {
 	return &Response{
 		req:  req,
 		resp: resp,
-		url: req.url,
+		url:  req.url,
 	}
 }
 
