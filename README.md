@@ -8,7 +8,7 @@ package main
 
 import (
 	"strings"
-	"github.com/zhuonima/webber"
+	"github.com/tzxyz/webber"
 )
 
 func main() {
